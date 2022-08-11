@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="js/shared.js"></script>
+    <script defer src="js/viewallbookings.js"></script>
+    <!-- MDL Colour Link -->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.orange-amber.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <title>View All Bookings</title>
+    <link rel="shortcut icon" type="image/icon" href="img/favicon.ico">
+</head>
+
+<body>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout__container">
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header is-small-screen is-upgraded"
+            data-upgraded=",MaterialLayout">
+            <header class="mdl-layout__header is-casting-shadow" style="background-color: var(--accent-colour);">
+                <div class="mdl-layout__header-row" style="padding: 0px 40px 0px 30px;position: relative;">
+                    <a href="index.html"><img src="img/Pristine-Cabs-Logo.png" style="position: relative;text-align: left;width: 100px;"></a>
+                    <!-- Title -->
+                    <span class="mdl-layout-title"
+                        style="color: var(--colour); font-weight: 700; font-style: italic; margin: 0px 20px 0px 20px;">Pristine
+                        Cabs</span>
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Navigation. We hide it in small screens. -->
+                    <nav class="mdl-navigation" style="position: relative;justify-content: flex-end;">
+                        <a class="mdl-navigation__link"
+                            style="color: var(--colour); line-height: 1.3; text-align: center;" href="index.html">Make
+                            a<br>New
+                            Booking</a>
+                        <a class="mdl-navigation__link"
+                            style="color: var(--colour); line-height: 1.3; text-align: center;"
+                            href="viewallbooking.html">View
+                            All<br>Bookings</a>
+                    </nav>
+                </div>
+            </header>
+            <main class="mdl-layout__content">
+                <div class="page-content">
+                    <!-- Put Our Body Content Here -->
+                    <div class="row" style="height:max-content;">
+                        <div class="column" style="height:790px;">
+                            <h2 style="display: flex; flex-direction: column; align-items: center;">Previous Bookings
+                            </h2>
+                            <!-- <div style="display: flex;margin: 15px;border: 1px solid black">
+                                <p style="margin-left: 20px">
+                                    From XXXXXXX<br>
+                                    To XXXXXXX<br>
+                                </p>
+                                 <p class ="test" style="display:flex;align-items: flex-end; justify-content: flex-start;" >
+                                    <button type="button">More Details</button>
+                                </p>     
+                                <p style="margin-left: 120px">
+                                    Date: <br>
+                                    Cost:
+                                </p>
+                                <div>
+                                    <p>Some text</p>
+                                </div>
+                            </div> -->
+                            <div id="pastBookingEntries" class="bookingEntries">
+                                <table class="b" class="center" class="ex1">
+                                    <tr>
+                                        <td style="text-align:justify;">
+                                            <p>
+                                                From XXXXXXX<br>
+                                                To XXXXXXX<br>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                Date:<br>
+                                                Cost:
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2">
+                                                <button onclick="window.location.href= 'detailedBooking.html'">More
+                                                    Details</button>
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="column" style="height:790px;">
+                            <h2 style="display: flex; flex-direction: column; align-items: center;">Future Bookings
+                            </h2>
+                            <div id="futureBookingEntries" class="bookingEntries">
+                                <table class="b" class="center" class="ex1">
+                                    <tr>
+                                        <td style="text-align:justify;">
+                                            <p>
+                                                From XXXXXXX<br>
+                                                To XXXXXXX<br>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                Date:<br>
+                                                Cost:
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2">
+                                                <button onclick="window.location.href= 'detailedBooking.html'">More
+                                                    Details</button>
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>

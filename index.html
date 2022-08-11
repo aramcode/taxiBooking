@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/main.css">
+  <script defer src="js/main.js"></script>
+  <script defer src="js/taxiData.js"></script>
+  <script defer src="js/services.js"></script>
+  <script defer src="js/shared.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- MDL Colour Link -->
+  <link rel="stylesheet" href="mdl-source-files/material.css">
+  <script defer src="mdl-source-files/material.js"></script>
+  <title>Make a New Booking</title>
+  
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet'>
+  <script
+    src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+  <link rel='stylesheet'
+    href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css'
+    type='text/css' />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+
+<body>
+  <!-- Always shows a header, even in smaller screens. -->
+  <div class="mdl-layout__container">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header is-small-screen is-upgraded"
+      data-upgraded=",MaterialLayout">
+      <header class="mdl-layout__header is-casting-shadow" style="background-color: var(--accent-colour);">
+        <div class="mdl-layout__header-row" style="padding: 0px 40px 0px 30px;position: relative;">
+          <a href="index.html"><img src="img/Pristine-Cabs-Logo.png"
+              style="position: relative;text-align: left;width: 100px;"></a>
+          <!-- Title -->
+          <span class="mdl-layout-title"
+            style="color: var(--colour); font-weight: 700; font-style: italic; margin: 0px 20px 0px 20px;">Pristine
+            Cabs</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation" style="position: relative;justify-content: flex-end;">
+            <a class="mdl-navigation__link" style="color: var(--colour); line-height: 1.3; text-align: center;"
+              href="index.html">Make a<br>New Booking</a>
+            <a class="mdl-navigation__link" style="color: var(--colour); line-height: 1.3; text-align: center;"
+              href="viewallbooking.html">View All<br>Bookings</a>
+          </nav>
+        </div>
+      </header>
+      <main class="mdl-layout__content" style="overflow-y: hidden;">
+        <div class="page-content" style="height: 100%;">
+          <!-- Put Our Body Content Here -->
+          <div id="pointControlsHolder" class="map-control-button-holder">
+            <button id="addPointButton" type="button" class="slight-drop-shadow mdl-chip" onclick="addPointButton()"
+              disabled>
+              <span class="mdl-chip__text">Add a Point</span>
+            </button>
+          </div>
+          <div id="map-content" style="height: 50%; background-color: brown;">
+            <!-- Put MAPBOX Content Here -->
+          </div>
+          <div id="trip-information" style="height: 50%;display: flex;">
+            <!-- All Under Map Content -->
+            <div class="mdl-grid" style="flex: 1 1;display: flex;">
+              <!-- Trip Points -->
+              <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--2-col-tablet mdl-cell--1-col-phone"
+                style="max-height: 100%;display: grid;box-sizing: border-box;">
+                <!-- List of Stops -->
+                <h3 style="margin-top: 8px;margin-bottom: 2px;">Route</h3>
+                <ul id="pointsList" class="demo-list-two mdl-list"
+                  style="overflow-y: scroll;padding-top: 0px;padding-bottom: 0px;">
+                  <li class="mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content" style="display: flex;">
+                      <i class="material-icons mdl-list__item-icon large-icons">trip_origin</i>
+                      <div style="flex-grow: 0.3;"></div>
+                      <div>
+                        <span>1 Smith Street</span>
+                        <span class="mdl-list__item-sub-title">Clayton 3168</span>
+                      </div>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                      <span class="mdl-list__item-secondary-info">Edit</span>
+                      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons"
+                          style="color: gray;">edit_location</i></a>
+                    </span>
+                  </li>
+                  <li class="mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content" style="display: flex;">
+                      <i class="material-icons mdl-list__item-icon large-icons">multiple_stop</i>
+                      <div style="flex-grow: 0.3;"></div>
+                      <div>
+                        <span>2 Smith Street</span>
+                        <span class="mdl-list__item-sub-title">Clayton 3168</span>
+                      </div>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                      <span class="mdl-list__item-secondary-info">Edit</span>
+                      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons"
+                          style="color: gray;">edit_location</i></a>
+                    </span>
+                  </li>
+                  <li class="mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content" style="display: flex;">
+                      <i class="material-icons mdl-list__item-icon large-icons">multiple_stop</i>
+                      <div style="flex-grow: 0.3;"></div>
+                      <div>
+                        <span>3 Smith Street</span>
+                        <span class="mdl-list__item-sub-title">Clayton 3168</span>
+                      </div>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                      <span class="mdl-list__item-secondary-info">Edit</span>
+                      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons"
+                          style="color: gray;">edit_location</i></a>
+                    </span>
+                  </li>
+                  <li class="mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content" style="display: flex;">
+                      <i class="material-icons mdl-list__item-icon large-icons">multiple_stop</i>
+                      <div style="flex-grow: 0.3;"></div>
+                      <div>
+                        <span>4 Smith Street</span>
+                        <span class="mdl-list__item-sub-title">Clayton 3168</span>
+                      </div>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                      <span class="mdl-list__item-secondary-info">Edit</span>
+                      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons"
+                          style="color: gray;">edit_location</i></a>
+                    </span>
+                  </li>
+                  <li class="mdl-list__item mdl-list__item--two-line">
+                    <span class="mdl-list__item-primary-content" style="display: flex;">
+                      <i class="material-icons mdl-list__item-icon large-icons">flag</i>
+                      <div style="flex-grow: 0.3;"></div>
+                      <div>
+                        <span>6 Smith Street</span>
+                        <span class="mdl-list__item-sub-title">Clayton 3168</span>
+                      </div>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                      <span class="mdl-list__item-secondary-info">Edit</span>
+                      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons"
+                          style="color: gray;">edit_location</i></a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="mdl-grid mdl-grid--no-spacing"
+                style="height: 100%; flex: 1; display: flex; flex-direction: column;">
+                <div id="stageMarkerHolder" class="stage-marker-holder">
+                  <div class="stage-marker" active="true" invalid="false">
+                    <i class="stage-icon marker-icon material-icons mdl-list__item-icon large-icons">
+                      date_range
+                    </i>
+                    <i class="marker-warning marker-icon material-icons mdl-list__item-icon large-icons">
+                      priority_high
+                    </i>
+                  </div>
+                  <div class="stage-marker" invalid="false">
+                    <i class="stage-icon marker-icon material-icons mdl-list__item-icon large-icons">
+                      commute
+                    </i>
+                    <i class="marker-warning marker-icon material-icons mdl-list__item-icon large-icons">
+                      priority_high
+                    </i>
+                  </div>
+                  <div class="stage-marker" invalid="false">
+                    <i class="stage-icon marker-icon material-icons mdl-list__item-icon large-icons">
+                      summarize
+                    </i>
+                    <i class="marker-warning marker-icon material-icons mdl-list__item-icon large-icons">
+                      priority_high
+                    </i>
+                  </div>
+                </div>
+                <!-- Trip Details/Controls -->
+                <div class="mdl-grid" style="height: 100%; flex:1">
+                  <div
+                    class="sliding-table-nav mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--hide-phone mdl-cell--stretch"
+                    style="justify-content: right;">
+                    <i id="backward-scroll-button" hidden class="material-icons mdl-list__item-icon large-icons"
+                      onclick='scrollTripMenu("backward")'>
+                      arrow_back_ios_new
+                    </i>
+                  </div>
+                  <div
+                    class="mdl-cell mdl-cell--8-col-desktop mdl-cell--4-col-tablet mdl-cell--1-col-phone mdl-cell--stretch">
+                    <div class="sliding-table-holder">
+                      <div id="tripMenu" class="sliding-table">
+                        <!-- Booking Time Cell -->
+                        <div class="cell">
+                          <h3>Enter Your Booking Time</h3>
+                          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield-small-padding mdl-textfield__input" type="date" id="tripDate"
+                              placeholder="">
+                            <label class="mdl-textfield__label" for="tripDate">Trip Date</label>
+                            <span id="date_msg" class="mdl-textfield__error">Cannot select a past date</span>
+                          </div>
+                          <div
+                            class="mdl-textfield-small-padding mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="time" id="tripTime" min="" placeholder="">
+                            <label class="mdl-textfield__label" for="tripTime">Trip Time</label>
+                            <span id="time_msg" class="mdl-textfield__error">Bookings must be made at least 10 mins in
+                              advance</span>
+                          </div>
+                        </div>
+                        <!-- Vehicle Selection -->
+                        <div class="cell">
+                          <h4 style="line-height: 0%;">Select Your Vehicle</h4>
+                          <!-- Begin Radio List -->
+                          <ul class="mdl-list" style="margin: 0px;">
+                            <li class="mdl-list__item">
+                              <span class="mdl-list__item-primary-content">
+                                <i class="material-icons  mdl-list__item-avatar">directions_car</i>
+                                Sedan
+                              </span>
+                              <span class="mdl-list__item-secondary-action">
+                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sedan">
+                                  <input type="radio" id="sedan" class="mdl-radio__button" name="vehicle-options"
+                                    value="sedan" checked />
+                                </label>
+                              </span>
+                            </li>
+                            <li class="mdl-list__item">
+                              <span class="mdl-list__item-primary-content">
+                                <i class="material-icons  mdl-list__item-avatar">directions_car</i>
+                                Van
+                              </span>
+                              <span class="mdl-list__item-secondary-action">
+                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="van">
+                                  <input type="radio" id="van" class="mdl-radio__button" name="vehicle-options"
+                                    value="van" />
+                                </label>
+                              </span>
+                            </li>
+                            <li class="mdl-list__item">
+                              <span class="mdl-list__item-primary-content">
+                                <i class="material-icons  mdl-list__item-avatar">directions_car</i>
+                                SUV
+                              </span>
+                              <span class="mdl-list__item-secondary-action">
+                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="suv">
+                                  <input type="radio" id="suv" class="mdl-radio__button" name="vehicle-options"
+                                    value="suv" />
+                                </label>
+                              </span>
+                            </li>
+                            <li class="mdl-list__item">
+                              <span class="mdl-list__item-primary-content">
+                                <i class="material-icons  mdl-list__item-avatar">directions_car</i>
+                                Minibus
+                              </span>
+                              <span class="mdl-list__item-secondary-action">
+                                <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                  for="minibus">
+                                  <input type="radio" id="minibus" class="mdl-radio__button" name="vehicle-options"
+                                    value="minibus" />
+                                </label>
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- Booking Summary Cell -->
+                        <div class="cell">
+                          <h3>Booking Summary</h3>
+                          <ul>
+                            <li style="list-style: none;">
+                              <div style="display: flex;">
+                                <div style="width:70%; text-align:left">
+                                  <span>Date:</span>
+                                </div>
+                                <div style="width:70%; text-align:left">
+                                  <span id="bs-date">12/05/21</span>
+                                </div>
+                              </div>
+                            </li>
+                            <li style="list-style: none;">
+                              <div style="display: flex;">
+                                <div style="width:70%; text-align:left">
+                                  <span>Time:</span>
+                                </div>
+                                <div style="width:70%; text-align:left">
+                                  <span id="bs-time">01:40pm</span>
+                                </div>
+                              </div>
+                            </li>
+                            <li style="list-style: none;">
+                              <div style="display: flex;">
+                                <div style="width:70%; text-align:left">
+                                  <span>ETA:</span>
+                                </div>
+                                <div style="width:70%; text-align:left">
+                                  <span id="bs-eta-time">02:10pm</span>
+                                </div>
+                              </div>
+                            </li>
+                            <li style="list-style: none;">
+                              <div style="display: flex;">
+                                <div style="width:70%; text-align:left">
+                                  <span>Duration:</span>
+                                </div>
+                                <div style="width:70%; text-align:left">
+                                  <span id="bs-eta">Confirm Points For Time</span>
+                                </div>
+                              </div>
+                            </li>
+                            <li style="list-style: none;">
+                              <div style="display: flex;">
+                                <div style="width:70%; text-align:left">
+                                  <span>Vehicle:</span>
+                                </div>
+                                <div style="width:70%; text-align:left">
+                                  <span id="bs-vehicle"></span>
+                                </div>
+                              </div>
+                            </li>
+                            <li style="list-style: none;">
+                              <div style="display: flex;">
+                                <div style="width:70%; text-align:left">
+                                  <span>Total Trip Fare:</span>
+                                </div>
+                                <div style="width:70%; text-align:left">
+                                  <span id="bs-fareTotal">$$$</span>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                          <!-- Dialog Box Content-->
+                          <dialog id="confirmationDialog">
+                            <div>
+                              <h3>Booking Details</h3>
+                              <div style='display:flex;'>
+                                <div>
+                                  <ul>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:20%; text-align:left">
+                                          <span>Date:</span>
+                                        </div>
+                                        <div style="width:80%; text-align:right">
+                                          <span id="db-date">20/05/21</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:20%; text-align:left">
+                                          <span>Time:</span>
+                                        </div>
+                                        <div style="width:80%; text-align:right">
+                                          <span id="db-time">01:40pm</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:80%; text-align:left">
+                                          <span>ETA:</span>
+                                        </div>
+                                        <div style="width:45%; text-align:right">
+                                          <span id="db-eta-time">02:10pm</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:80%; text-align:left">
+                                          <span>Vehicle:</span>
+                                        </div>
+                                        <div style="width:40%; text-align:right">
+                                          <span id="db-vehicle"></span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <!-- Break Line-->
+                                      <br>
+                                    </li>
+                                  </ul>
+                                </div>
+                                <div style="display: flex;">
+                                  <ul>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:80%; text-align:left">
+                                          <span>Flag Rate: </span>
+                                        </div>
+                                        <div style="width:20%; text-align:left">
+                                          <span>$4.20</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:80%; text-align:left">
+                                          <span>Distance Rate ($1.622/Km):</span>
+                                        </div>
+                                        <div style="width:20%; text-align:left">
+                                          <span>$$$</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:80%; text-align:left">
+                                          <span>Night Levy (5pm-9am):</span>
+                                        </div>
+                                        <div style="width:20%; text-align:left">
+                                          <span>$1.10</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:80%; text-align:left">
+                                          <span>Commericial Passenger Levy (SUV,Van,Minibus) :</span>
+                                        </div>
+                                        <div style="width:20%; text-align:left">
+                                          <span>$1.10</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:80%; text-align:left">
+                                          <span>Additional Vehicle Levy:</span>
+                                        </div>
+                                        <div style="width:20%; text-align:left">
+                                          <span>$$$</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <li style="list-style: none;">
+                                      <div style="display: flex;">
+                                        <div style="width:80%; text-align:left">
+                                          <span>Total Fare:</span>
+                                        </div>
+                                        <div style="width:20%; text-align:left">
+                                          <span>$$$</span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <button id="cancelButton">Cancel</button>
+                            <button id="confirmBtn" value="default">Confirm</button>
+                          </dialog>
+                          <div>
+                            <button id="confirmBooking" type="button" style="font-size: 20px;">Create the
+                              Booking</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="sliding-table-nav mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--hide-phone mdl-cell--stretch"
+                    style="justify-content: left;">
+                    <i id="forward-scroll-button" class="material-icons mdl-list__item-icon large-icons"
+                      onclick='scrollTripMenu("forward")'>
+                      arrow_forward_ios_new
+                    </i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- To Work On -->
+          </div>
+        </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </main>
+  </div>
+  </div>
+  <div id="snackbar-toast" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
+</body>

@@ -1,0 +1,227 @@
+:root {
+    --colour: #ffffff;
+    --accent-colour: #045712;
+    --booking-menu-index: 0;
+}
+.mdl-radio {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* This is for the sliding menu */
+
+
+
+.cell {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+  .sliding-table {
+    height: 100%;
+    transition: transform 1s ease-in-out;
+    transform: translate(calc(var(--booking-menu-index) * -100%));
+    grid-template-columns: repeat(5 /* <- Max Number of sliding cells */,100%);
+    display: grid;
+  }
+  .sliding-table-holder {
+    border: solid 1px black;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+  }
+  .sliding-table-nav {
+    display: grid;
+    align-content: center;
+  }
+  .large-icons {
+    margin-top: 0px;
+    scale: 160%;
+    margin-right: 0px;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .flyToPoint {
+    cursor: pointer !important;
+  }
+  .stage-marker-holder {
+    display: grid;
+    grid-template-columns: repeat(3,10%);
+    height: min-content;
+    justify-content: center;
+    flex: 0;
+    margin-top: 1%;
+  }
+  .stage-marker {
+      position: relative;
+      background-color: rgb(167, 167, 167);
+      border-radius: 50% 50% 50% 50%;
+      height: 50px;
+      width: 50px;
+      box-sizing: border-box;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.2s linear;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  }
+  .marker-icon {
+    color: #ebebeb !important;
+    transition: color 0.2s linear;
+  }
+  .stage-marker[invalid="true"] .marker-warning {
+    opacity: 1 !important;
+  }
+  .marker-warning {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    opacity: 0;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: rgb(255, 0, 0) !important; /* Colour of exclamation mark */
+    text-shadow: 2px 2px 0px white,
+              -2px 2px 0px white,
+              2px -2px 0px white,
+              -2px -2px 0px white;
+  }
+  .stage-marker[active="true"] {
+    background-color: rgb(255, 157, 0);
+  }
+  .stage-marker[active=true] .stage-icon {
+    color: #ffffff !important;
+  }
+  .cell h3 {
+      margin: 0.4rem;
+  }
+/* End Sliding Menu CSS */
+
+/* Map Box Styles */
+.mapboxgl-popup-content {
+  display: grid;
+  justify-content: center;
+  grid-gap: 3px;  
+}
+
+.custom-marker {
+  display: grid;
+  height: 25px;
+  width: 25px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  background-color: darkblue;
+  align-items: center;
+  color: white;
+  font-size: 1.6rem;
+  justify-content: center;
+  font-weight: 900;
+}
+
+/*.mdl-textfield-small-padding {
+  padding: 2% 0% !important;
+}*/
+
+.map-control-button-holder {
+  height: min-content;
+  width: min-content;
+  position: absolute;
+  margin: 0.5%;
+  z-index: 100;
+}
+
+.slight-drop-shadow {
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* Overriding normal MDL styles*/
+.mdl-list__item-secondary-content-center {
+  align-items: center !important;
+}
+
+
+.mdl-list__item {
+  padding: 4px 16px !important;
+}
+
+/*#map-content {
+  position: relative;
+  z-index: -1;
+}
+
+.slight-drop-shadow::after {
+  content: '';
+  border-radius: 10%;
+  box-shadow: 0px 0px 0px 40px black;
+  display: block;
+  position: relative;
+  top: -50%;
+  z-index: -1;
+}*/
+
+.trip-information {
+    background-color: purple;
+    height: 100%;
+    width: 100%;
+    border-radius: 10%;
+}
+
+.bookingEntries {
+  justify-content: center;
+  display: grid;
+}
+.column {
+    float: left;
+    width:49%;
+    
+  }
+  
+  table.b {
+    width: 450px;  
+    margin: 0 0 20px
+    
+    
+    /* margin-left: 20px; */
+  }
+
+  table {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  
+  table.center {
+    margin-left: auto; 
+    margin-right: auto;
+  }
+
+  table.ex1 {
+    empty-cells: hide;
+  }
+
+  .card {
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+    text-align: center;
+    border-radius: 15px 50px;
+    border:black;
+    background-color:rgba(132, 132, 199, 0.295);
+  }
+
+  #noPoints {
+    font-style: italic;
+    font-weight: 500;
+    color: rgb(100, 100, 100);
+  }
